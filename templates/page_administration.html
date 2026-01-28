@@ -1,0 +1,552 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #4361ee; --bg: #f8f9fc; }
+        body { background-color: var(--bg); font-family: 'Inter', sans-serif; padding-top: 30px; }
+        .tab-content { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1); margin-top: 20px; }
+        .nav-tabs .nav-link { border: none; font-weight: 600; color: #858796; padding: 12px 20px; }
+        .nav-tabs .nav-link.active { background: var(--primary) !important; color: white !important; border-radius: 8px; }
+        .img-preview { width: 80px; height: 80px; object-fit: cover; border-radius: 10px; border: 2px solid #ddd; }
+        .card-custom { transition: transform 0.2s; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; }
+        .card-custom:hover { transform: translateY(-3px); }
+        .status-badge { position: absolute; top: 10px; right: 10px; font-size: 0.7rem; padding: 4px 8px; border-radius: 20px; z-index: 10; }
+        .bg-success-soft { background-color: #e3fcef; color: #00ab66; border: 1px solid #00ab66; }
+        .section-control { background-color: #f0f2ff; border: 1px dashed var(--primary); border-radius: 10px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark">Espace Administration</h2>
+        <a href="/" class="btn btn-outline-primary shadow-sm">Voir le site public</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show border-0 shadow-sm">{{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+        {% endfor %}
+    {% endif %}
+
+    <ul class="nav nav-tabs border-0" id="adminTab">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profil">Profil & Bio</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#specialite">Spécialité</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#realisations">Réalisations</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#temoignages">Témoignages</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#competences">Compétences</button></li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <div class="tab-pane fade show active" id="profil">
+            <div class="row g-4 border-bottom pb-4 mb-4">
+                
+                <div class="col-md-5 border-end">
+                    <label class="form-label fw-bold">Ma Photo de profil</label>
+                    <div class="bg-light p-3 rounded">
+                        <form method="post" class="mb-3 border-bottom pb-2">
+                            {% csrf_token %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="est_visible" id="vis_photo" 
+                                       {% if AFFICHER_la_PHOTO_DE_PROFIL.est_visible %}checked{% endif %} 
+                                       onchange="this.form.submit();">
+                                <label class="form-check-label small fw-bold text-primary" for="vis_photo">Afficher la photo sur le site</label>
+                                <input type="hidden" name="btn_visibilite_photo_auto" value="1">
+                            </div>
+                        </form>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                {% if AFFICHER_la_PHOTO_DE_PROFIL.images %}
+                                    <img src="{{ AFFICHER_la_PHOTO_DE_PROFIL.images.url }}" class="img-preview shadow-sm">
+                                {% else %}
+                                    <div class="img-preview d-flex align-items-center justify-content-center text-muted bg-white border"><i class="fas fa-user fa-2x"></i></div>
+                                {% endif %}
+                                <div class="flex-grow-1">
+                                    <input type="file" name="images" class="form-control form-control-sm mb-2">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                                    <button type="submit" name="btn_photo" class="btn btn-primary btn-sm w-100">Mettre à jour</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                        <form method="post">{% csrf_token %}<button type="submit" name="btn_supprimer_photo" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Supprimer la photo ?')"><i class="fas fa-trash-alt me-1"></i> Supprimer la photo</button></form>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <label class="form-label fw-bold">A propos de Moi</label>
+                    <div class="bg-light p-3 rounded">
+                        <form method="post" class="mb-3 border-bottom pb-2">
+                            {% csrf_token %}
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="est_visible_bio" id="vis_bio_auto" 
+       {% if A_PROPOS_DE_MOI.est_visible %}checked{% endif %} 
+       onchange="this.form.submit();">
+                                <label class="form-check-label small fw-bold text-primary" for="vis_bio_auto">Afficher la bio sur le site</label>
+        <input type="hidden" name="btn_visibilite_bio_auto" value="1">                        
+                            </div>
+                        </form>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <textarea name="description" class="form-control mb-3" rows="3">{% if A_PROPOS_DE_MOI %}{{ A_PROPOS_DE_MOI.description }}{% endif %}</textarea>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                            <button type="submit" name="btn_apropos" class="btn btn-success btn-sm w-100 mb-2">Enregistrer le texte</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                        </form>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                        <form method="post">{% csrf_token %}<button type="submit" name="btn_supprimer_apropos" class="btn btn-outline-danger btn-sm w-100" onclick="return confirm('Supprimer le texte ?')"><i class="fas fa-trash-alt me-1"></i> Supprimer le texte</button></form>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-control p-3 mb-3">
+                <form method="post" class="m-0">
+                    {% csrf_token %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="est_visible" id="master_res" {% if Mes_Reseaux.0.est_visible %}checked{% endif %} onchange="this.form.submit();">
+                        <label class="form-check-label fw-bold text-primary" for="master_res">Afficher les RÉSEAUX SOCIAUX sur le site</label>
+                        <input type="hidden" name="btn_visibilite_section_res" value="1">
+                    </div>
+                </form>
+            </div>
+            <h5 class="fw-bold mb-3">Mes Réseaux</h5>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <form method="post" class="bg-light p-3 rounded border">
+                        {% csrf_token %}
+                        <select name="nom_reseau" class="form-select mb-2">
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="github">GitHub</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">X (Twitter)</option>
+                            <option value="instagram">Instagram</option>                            
+                        </select>
+                        <input type="url" name="url_reseau" class="form-control mb-2" placeholder="URL du profil" required>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                        <button type="submit" name="btn_reseau" class="btn btn-primary btn-sm w-100">Ajouter / Mettre à jour</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                    </form>
+                </div>
+                <div class="col-md-8">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for r in Mes_Reseaux %}
+                        <div class="badge bg-white text-dark border p-2 d-flex align-items-center gap-2 shadow-sm">
+                            <i class="fab fa-{{ r.nom }}"></i> {{ r.nom|capfirst }}
+                            <form method="post" class="m-0">{% csrf_token %}<input type="hidden" name="id_reseau" value="{{ r.id }}"><button type="submit" name="btn_supprimer_reseau" class="btn-close" onclick="return confirm('Supprimer ce lien ?')"></button></form>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted small">Aucun réseau configuré.</p>
+                        {% endfor %}
+                    </div>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="specialite">
+            <div class="section-control p-3">
+                <form method="post" class="m-0">
+                    {% csrf_token %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="est_visible" id="master_spec" {% if SPECIALITE.est_visible %}checked{% endif %} onchange="this.form.submit();">
+                        <label class="form-check-label fw-bold text-primary" for="master_spec">Afficher la section SPÉCIALITÉ sur le site</label>
+                        <input type="hidden" name="btn_visibilite_section_spec" value="1">
+                    </div>
+                </form>
+            </div>
+            <div class="bg-light p-4 rounded border shadow-sm mt-3">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if SPECIALITE.images %}
+                        <div class="text-center mb-3"><img src="{{ SPECIALITE.images.url }}" class="rounded shadow" style="max-height: 150px;"></div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Description de la spécialité</label>
+                        <textarea name="description_speciality" class="form-control" rows="3">{% if SPECIALITE %}{{ SPECIALITE.description_speciality }}{% endif %}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Image de spécialité</label>
+                        <input type="file" name="images" class="form-control">
+                    </div>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                    <button type="submit" name="btn_specialite" class="btn btn-primary w-100 mb-2">Enregistrer les modifications</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                </form>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                 
+                <form method="post">{% csrf_token %}<button type="submit" name="btn_supprimer_specialite" class="btn btn-outline-danger w-100" onclick="return confirm('Supprimer intégralement ?')"><i class="fas fa-trash-alt me-1"></i> Supprimer la section</button></form>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="realisations">
+            <div class="section-control p-3 d-flex justify-content-between align-items-center">
+                <form method="post" class="m-0">
+                    {% csrf_token %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="est_visible" id="master_real" {% if AFFICHER_les_REALISATIONS_PERSONNELLES.0.est_visible %}checked{% endif %} onchange="this.form.submit();">
+                        <label class="form-check-label fw-bold text-primary" for="master_real">Afficher la section RÉALISATIONS sur le site</label>
+                        <input type="hidden" name="btn_visibilite_section_real" value="1">
+                    </div>
+                </form>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                 
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addReal"><i class="fas fa-plus me-2"></i>Nouveau Projet</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+            </div>
+            <div class="row mt-3">
+                {% for r in AFFICHER_les_REALISATIONS_PERSONNELLES %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 card-custom border-0 shadow-sm">
+                        {% if r.est_visible %}<span class="status-badge bg-success-soft">Public</span>{% else %}<span class="status-badge bg-secondary text-white">Masqué</span>{% endif %}
+                        {% if r.images %}<img src="{{ r.images.url }}" class="card-img-top" style="height:150px; object-fit:cover;">{% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="fw-bold">{{ r.nom }}</h6>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                                 
+                                <button class="btn btn-sm btn-outline-primary flex-grow-1" data-bs-toggle="modal" data-bs-target="#editReal{{ r.id }}">Modifier</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                                <form method="post" class="m-0 flex-grow-1">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id_realisation" value="{{ r.id }}">
+                                    <button type="submit" name="btn_bascule_vis_real" class="btn btn-sm {% if r.est_visible %}btn-outline-warning{% else %}btn-outline-success{% endif %} w-100">
+                                        {% if r.est_visible %}Masquer{% else %}Afficher{% endif %}
+                                    </button>
+                                </form>
+                                <form method="post" class="m-0 w-100 mt-1">
+                                    {% csrf_token %}<input type="hidden" name="id_realisation" value="{{ r.id }}">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                                    <button type="submit" name="btn_supprimer_real" class="btn btn-sm btn-danger w-100" onclick="return confirm('Supprimer ?')"><i class="fas fa-trash"></i>&nbsp;Supprimer</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="temoignages">
+            <div class="section-control p-3 d-flex justify-content-between align-items-center">
+                <form method="post" class="m-0">
+                    {% csrf_token %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="est_visible" id="master_tem" {% if TEMOIGNAGES_des_PERSONNES_cards.0.est_visible %}checked{% endif %} onchange="this.form.submit();">
+                        <label class="form-check-label fw-bold text-primary" for="master_tem">Afficher la section TÉMOIGNAGES sur le site</label>
+                        <input type="hidden" name="btn_visibilite_section_tem" value="1">
+                    </div>
+                </form>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                 
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTemoignage"><i class="fas fa-plus me-2"></i>Ajouter un Avis</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+            </div>
+            <div class="row mt-3">
+                {% for t in TEMOIGNAGES_des_PERSONNES_cards %}
+                <div class="col-md-6 mb-3">
+                    <div class="card border-0 shadow-sm p-3 card-custom">
+                        {% if t.est_visible %}<span class="status-badge bg-success-soft">Public</span>{% else %}<span class="status-badge bg-secondary text-white">Masqué</span>{% endif %}
+                        <div class="d-flex gap-3 align-items-center">
+                            {% if t.images %}<img src="{{ t.images.url }}" class="rounded-circle border" style="width:50px; height:50px; object-fit:cover;">
+                            {% else %}<div class="rounded-circle bg-light d-flex align-items-center justify-content-center border" style="width:50px; height:50px;"><i class="fas fa-quote-left text-muted"></i></div>{% endif %}
+                            <div class="flex-grow-1"><h6 class="mb-0 fw-bold">{{ t.nom }}</h6></div>
+                            <div class="d-flex gap-1">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                                 
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editTem{{ t.id }}"><i class="fas fa-pen"></i></button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                                <form method="post" class="m-0">
+                                    {% csrf_token %}<input type="hidden" name="id_temoignage" value="{{ t.id }}">
+                                    <button type="submit" name="btn_bascule_vis_tem" class="btn btn-sm btn-outline-warning"><i class="fas fa-eye-slash"></i></button>
+                                </form>
+                                <form method="post" class="m-0">
+                                    {% csrf_token %}<input type="hidden" name="id_temoignage" value="{{ t.id }}">
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %}                                     
+                                    <button type="submit" name="btn_supprimer_temoignage" class="btn btn-sm btn-outline-danger" onclick="return confirm('Supprimer ?')"><i class="fas fa-trash"></i></button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="competences">
+            <div class="section-control p-3">
+                <form method="post" class="m-0">
+                    {% csrf_token %}
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="est_visible" id="master_comp" {% if Mes_Competences_Cles.0.est_visible %}checked{% endif %} onchange="this.form.submit();">
+                        <label class="form-check-label fw-bold text-primary" for="master_comp">Afficher la section COMPÉTENCES sur le site</label>
+                        <input type="hidden" name="btn_visibilite_section_comp" value="1">
+                    </div>
+                </form>
+            </div>
+            <h4 class="mt-3 mb-4 fw-bold">Ajouter une Compétence</h4>
+            <form method="post" class="input-group mb-4 shadow-sm">
+                {% csrf_token %}
+                <input type="text" name="nom_competence" class="form-control border-0 px-3" placeholder="Ex: Python, Django, HTML..." required>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                <button type="submit" name="btn_ajouter_comp" class="btn btn-primary px-4">Ajouter</button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+            </form>
+            <div class="d-flex flex-wrap gap-2">
+                {% for c in Mes_Competences_Cles %}
+                <div class="badge bg-white text-dark border p-2 px-3 d-flex align-items-center gap-3 shadow-sm rounded-pill">
+                    <span class="fw-bold">{{ c.nom }}</span>
+                    <form method="post" class="m-0 d-flex gap-1 align-items-center">
+                        {% csrf_token %}<input type="hidden" name="id_competence" value="{{ c.id }}">
+                        <button type="submit" name="btn_bascule_vis_comp" class="btn btn-link p-0 text-{% if c.est_visible %}success{% else %}muted{% endif %}"><i class="fas fa-circle" style="font-size: 8px;"></i></button>
+    {# 1. On vérifie d'abord si l'utilisateur existe en session #}
+    {% if request.session.user %}
+        
+        {% with user_role=request.session.user.role %}
+
+            {% if user_role == 'Administrateur' %} 
+                        <button type="submit" name="btn_supprimer_comp" class="btn-close shadow-none" style="font-size: 10px;" onclick="return confirm('Supprimer ?')"></button>
+            {% endif %}
+
+        {% endwith %}
+
+    {% endif %}
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addReal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="post" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-header border-0"><h5>Nouveau Projet</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <input type="text" name="nom" class="form-control mb-3" placeholder="Nom du projet" required>
+                <textarea name="description" class="form-control mb-3" placeholder="Description"></textarea>
+                <input type="file" name="images" class="form-control mb-3">
+            </div>
+            <div class="modal-footer border-0"><button type="submit" name="btn_ajouter_real" class="btn btn-primary w-100">Créer le projet</button></div>
+        </form>
+    </div>
+</div>
+
+{% for r in AFFICHER_les_REALISATIONS_PERSONNELLES %}
+<div class="modal fade" id="editReal{{ r.id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="post" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-header border-0"><h5>Modifier : {{ r.nom }}</h5></div>
+            <div class="modal-body">
+                <input type="hidden" name="id_realisation" value="{{ r.id }}">
+                <input type="text" name="nom" class="form-control mb-3" value="{{ r.nom }}">
+                <textarea name="description" class="form-control mb-3">{{ r.description }}</textarea>
+                <input type="file" name="images" class="form-control mb-3">
+            </div>
+            <div class="modal-footer border-0"><button type="submit" name="btn_modifier_real" class="btn btn-success w-100">Mettre à jour</button></div>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+<div class="modal fade" id="addTemoignage" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="post" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-header border-0"><h5>Ajouter un avis</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                <input type="text" name="nom" class="form-control mb-3" placeholder="Nom du client" required>
+                <textarea name="description" class="form-control mb-3" placeholder="Son témoignage" required></textarea>
+                <input type="file" name="images" class="form-control mb-3">
+            </div>
+            <div class="modal-footer border-0"><button type="submit" name="btn_ajouter_temoignage" class="btn btn-primary w-100">Enregistrer</button></div>
+        </form>
+    </div>
+</div>
+
+{% for t in TEMOIGNAGES_des_PERSONNES_cards %}
+<div class="modal fade" id="editTem{{ t.id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="post" enctype="multipart/form-data" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-header border-0"><h5>Modifier l'avis de {{ t.nom }}</h5></div>
+            <div class="modal-body">
+                <input type="hidden" name="id_temoignage" value="{{ t.id }}">
+                <input type="text" name="nom" class="form-control mb-3" value="{{ t.nom }}">
+                <textarea name="description" class="form-control mb-3">{{ t.description }}</textarea>
+                <input type="file" name="images" class="form-control mb-3">
+            </div>
+            <div class="modal-footer border-0"><button type="submit" name="btn_modifier_temoignage" class="btn btn-success w-100">Mettre à jour</button></div>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        // Restauration de l'onglet actif
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            var tabEl = document.querySelector('button[data-bs-target="' + activeTab + '"]');
+            if(tabEl) { new bootstrap.Tab(tabEl).show(); }
+        }
+        // Sauvegarde au clic
+        document.querySelectorAll('button[data-bs-toggle="tab"]').forEach(function(btn){
+            btn.addEventListener('shown.bs.tab', function(e){
+                localStorage.setItem('activeTab', e.target.getAttribute('data-bs-target'));
+            });
+        });
+    });
+</script>
+</body>
+</html>
