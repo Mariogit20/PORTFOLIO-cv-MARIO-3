@@ -1,0 +1,341 @@
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11
+$ git init
+Initialized empty Git repository in D:/PYTHON DJANGO HOPES/github11/.git/
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11 (master)
+$ git clone https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3.git
+Cloning into 'PORTFOLIO-cv-MARIO-3'...
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (3/3), done.
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11 (master)
+$ cd PORTFOLIO-cv-MARIO-3
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (main)
+$ git branch Test
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (main)
+$ git checkout Test
+Switched to branch 'Test'
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Test)
+$ git push --set-upstream origin Test
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'Test' on GitHub by visiting:
+remote:      https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3/pull/new/Test
+remote:
+To https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3.git
+ * [new branch]      Test -> Test
+branch 'Test' set up to track 'origin/Test'.
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Test)
+$ git branch Dev
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Test)
+$ git checkout Dev
+Switched to branch 'Dev'
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git push --set-upstream origin Dev
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote:
+remote: Create a pull request for 'Dev' on GitHub by visiting:
+remote:      https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3/pull/new/Dev
+remote:
+To https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3.git
+ * [new branch]      Dev -> Dev
+branch 'Dev' set up to track 'origin/Dev'.
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git add .gitignore
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git commit -m "Ajout gitignore"
+[Dev 6961ca7] Ajout gitignore
+ 1 file changed, 2 insertions(+)
+ create mode 100644 .gitignore
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git config --global http.postBuffer 2048576000
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 306 bytes | 153.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3.git
+   376be08..6961ca7  Dev -> Dev
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git add *
+The following paths are ignored by one of your .gitignore files:
+venv
+hint: Use -f if you really want to add them.
+hint: Disable this message with "git config advice.addIgnoredFile false"
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git commit -m "second commit"
+[Dev b76d8ce] second commit
+ 201 files changed, 13018 insertions(+)
+ create mode 100644 Code complet views.py main.html urls.pdf
+ create mode 100644 Code complet views.py main.html urls.py.docx
+ create mode 100644 Creer ADMINISTRATEUR PAR DEFAUT.txt
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration v2 ACT
+UEL.docx
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration v2 ACT
+UEL.pdf
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration v2.doc
+x
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration v3.doc
+x
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration.docx
+ create mode 100644 Creer FICHIER DE DONNEES INITIAL Fichier de migration.txt
+ create mode 100644 Exemple de MENUS CREES avec le FICHIER DE MIGRATION.docx
+ create mode 100644 Exemple de MENUS CREES avec le FICHIER DE MIGRATION.pdf
+ create mode 100644 INSCRIPTION CODE gemini.docx
+ create mode 100644 PackageUser/__init__.py
+ create mode 100644 PackageUser/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 PackageUser/__pycache__/modul_new_user.cpython-311.pyc
+ create mode 100644 PackageUser/modul_new_user.py
+ create mode 100644 app_acceuil/__init__.py
+ create mode 100644 app_acceuil/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_acceuil/__pycache__/admin.cpython-311.pyc
+ create mode 100644 app_acceuil/__pycache__/apps.cpython-311.pyc
+ create mode 100644 app_acceuil/__pycache__/models.cpython-311.pyc
+ create mode 100644 app_acceuil/__pycache__/urls.cpython-311.pyc
+ create mode 100644 app_acceuil/__pycache__/views.cpython-311.pyc
+ create mode 100644 app_acceuil/admin.py
+ create mode 100644 app_acceuil/apps.py
+ create mode 100644 app_acceuil/migrations/0001_initial.py
+ create mode 100644 app_acceuil/migrations/0002_alter_projetscards_description_a
+nd_more.py
+ create mode 100644 app_acceuil/migrations/0003_alter_projetscards_images.py
+ create mode 100644 app_acceuil/migrations/0004_projetscards_created_at.py
+ create mode 100644 app_acceuil/migrations/0005_projetsfirstspeciality.py
+ create mode 100644 app_acceuil/migrations/0006_projetmesrealisations.py
+ create mode 100644 app_acceuil/migrations/0007_projetphotodeprofil.py
+ create mode 100644 app_acceuil/migrations/0008_projetaproposdemoi.py
+ create mode 100644 app_acceuil/migrations/0009_mescompetencescles.py
+ create mode 100644 app_acceuil/migrations/0010_mescompetencescles_est_visible_a
+nd_more.py
+ create mode 100644 app_acceuil/migrations/0011_alter_projetaproposdemoi_options
+.py
+ create mode 100644 app_acceuil/migrations/0012_alter_projetmesrealisations_opti
+ons_and_more.py
+ create mode 100644 app_acceuil/migrations/0013_reseausocial.py
+ create mode 100644 app_acceuil/migrations/0014_alter_mescompetencescles_nom_and
+_more.py
+ create mode 100644 app_acceuil/migrations/0015_alter_reseausocial_nom.py
+ create mode 100644 app_acceuil/migrations/__init__.py
+ create mode 100644 app_acceuil/migrations/__pycache__/0001_initial.cpython-311.
+pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0002_alter_projetscards_d
+escription_and_more.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0003_alter_projetscards_i
+mages.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0004_projetscards_created
+_at.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0005_projetsfirstspeciali
+ty.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0006_projetmesrealisation
+s.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0007_projetphotodeprofil.
+cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0008_projetaproposdemoi.c
+python-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0009_mescompetencescles.c
+python-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0010_mescompetencescles_e
+st_visible_and_more.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0011_alter_projetaproposd
+emoi_options.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0012_alter_projetmesreali
+sations_options_and_more.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0013_reseausocial.cpython
+-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0014_alter_mescompetences
+cles_nom_and_more.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/0015_alter_reseausocial_n
+om.cpython-311.pyc
+ create mode 100644 app_acceuil/migrations/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_acceuil/models.py
+ create mode 100644 app_acceuil/tests.py
+ create mode 100644 app_acceuil/urls.py
+ create mode 100644 app_acceuil/views.py
+ create mode 100644 app_contact/__init__.py
+ create mode 100644 app_contact/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_contact/__pycache__/admin.cpython-311.pyc
+ create mode 100644 app_contact/__pycache__/apps.cpython-311.pyc
+ create mode 100644 app_contact/__pycache__/models.cpython-311.pyc
+ create mode 100644 app_contact/__pycache__/urls.cpython-311.pyc
+ create mode 100644 app_contact/__pycache__/views.cpython-311.pyc
+ create mode 100644 app_contact/admin.py
+ create mode 100644 app_contact/apps.py
+ create mode 100644 app_contact/migrations/0001_initial.py
+ create mode 100644 app_contact/migrations/0002_user.py
+ create mode 100644 app_contact/migrations/0003_alter_user_email.py
+ create mode 100644 app_contact/migrations/0004_user_role.py
+ create mode 100644 app_contact/migrations/0005_role_alter_user_nom_alter_user_p
+assword_and_more.py
+ create mode 100644 app_contact/migrations/0006_table_role_de_user.py
+ create mode 100644 app_contact/migrations/0007_administrateur_role.py
+ create mode 100644 app_contact/migrations/__init__.py
+ create mode 100644 app_contact/migrations/__pycache__/0001_initial.cpython-311.
+pyc
+ create mode 100644 app_contact/migrations/__pycache__/0002_user.cpython-311.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0003_alter_user_email.cpy
+thon-311.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0004_user_role.cpython-31
+1.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0005_role_alter_user_nom_
+alter_user_password_and_more.cpython-311.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0006_table_role_de_user.c
+python-311.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0007_administrateur_role.
+cpython-311.pyc
+ create mode 100644 app_contact/migrations/__pycache__/0007_setup_role.cpython-3
+11.pyc
+ create mode 100644 app_contact/migrations/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_contact/models.py
+ create mode 100644 app_contact/tests.py
+ create mode 100644 app_contact/urls.py
+ create mode 100644 app_contact/views.py
+ create mode 100644 app_user/__init__.py
+ create mode 100644 app_user/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_user/__pycache__/admin.cpython-311.pyc
+ create mode 100644 app_user/__pycache__/apps.cpython-311.pyc
+ create mode 100644 app_user/__pycache__/models.cpython-311.pyc
+ create mode 100644 app_user/__pycache__/urls.cpython-311.pyc
+ create mode 100644 app_user/__pycache__/views.cpython-311.pyc
+ create mode 100644 app_user/admin.py
+ create mode 100644 app_user/apps.py
+ create mode 100644 app_user/migrations/0001_initial.py
+ create mode 100644 app_user/migrations/0002_setup_menus.py
+ create mode 100644 app_user/migrations/0003_alter_menuacces_user_delete_user.py
+ create mode 100644 app_user/migrations/__init__.py
+ create mode 100644 app_user/migrations/__pycache__/0001_initial.cpython-311.pyc
+ create mode 100644 app_user/migrations/__pycache__/0002_setup_menus.cpython-311
+.pyc
+ create mode 100644 app_user/migrations/__pycache__/0003_alter_menuacces_user_de
+lete_user.cpython-311.pyc
+ create mode 100644 app_user/migrations/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_user/models.py
+ create mode 100644 app_user/templatetags/__init__.py
+ create mode 100644 app_user/templatetags/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 app_user/templatetags/__pycache__/admin_extras.cpython-311.p
+yc
+ create mode 100644 app_user/templatetags/admin_extras.py
+ create mode 100644 app_user/tests.py
+ create mode 100644 app_user/urls.py
+ create mode 100644 app_user/views.py
+ create mode 100644 db - Copie.sqlite3
+ create mode 100644 db.sqlite3
+ create mode 100644 manage.py
+ create mode 100644 media/static/images/BRUEL.jpg
+ create mode 100644 media/static/images/BRUEL_Patrick-24x30-2002.jpg
+ create mode 100644 media/static/images/Emma.JPG
+ create mode 100644 media/static/images/Human_Resource.PNG
+ create mode 100644 media/static/images/Mario.JPG
+ create mode 100644 media/static/images/Mario_8T618j0.JPG
+ create mode 100644 media/static/images/Mario_CRnl3b3.JPG
+ create mode 100644 media/static/images/Mario_Pzw6IF0.JPG
+ create mode 100644 media/static/images/Mario_oxseEAm.JPG
+ create mode 100644 media/static/images/Mario_photo.jpeg
+ create mode 100644 media/static/images/Mario_photo_7vTY6x7.jpeg
+ create mode 100644 media/static/images/Ordinateur.png
+ create mode 100644 media/static/images/Ordinateur_oxg2zf2.png
+ create mode 100644 media/static/images/Ordinateur_p2IKbsB.png
+ create mode 100644 media/static/images/arnold_adult.jpg
+ create mode 100644 media/static/images/arnold_schwarzenegger_vieux1.JPG
+ create mode 100644 media/static/images/arnold_schwarzenegger_vieux2.JPG
+ create mode 100644 media/static/images/arnold_schwarzenegger_vieux2_Ud8jtNL.JPG
+ create mode 100644 media/static/images/arnold_schwarzenegger_vieux2_rk632Os.JPG
+ create mode 100644 media/static/images/belle-photo1.jpg
+ create mode 100644 media/static/images/bord_de_terre.png
+ create mode 100644 media/static/images/bruce_fille.JPG
+ create mode 100644 media/static/images/bruce_willis.jpg
+ create mode 100644 media/static/images/bruce_willis_fille.JPG
+ create mode 100644 media/static/images/bruce_willis_fille_QnMyGFX.JPG
+ create mode 100644 media/static/images/bruce_willis_wa6o3su.jpg
+ create mode 100644 media/static/images/camion-benne.jpg
+ create mode 100644 media/static/images/camion-benne_PVp49b8.jpg
+ create mode 100644 media/static/images/camion-benne_yMZfF9s.jpg
+ create mode 100644 media/static/images/camion_fourgon.JPG
+ create mode 100644 media/static/images/camion_fourgon_NXeOyK6.JPG
+ create mode 100644 media/static/images/camion_fourgon_wAW86JC.JPG
+ create mode 100644 media/static/images/camion_frigorifique.jpg
+ create mode 100644 media/static/images/camion_plateau.jpg
+ create mode 100644 media/static/images/chicago.jpg
+ create mode 100644 media/static/images/imageORDINATEUR.jpg
+ create mode 100644 media/static/images/imageORDINATEUR_7GTpHOA.jpg
+ create mode 100644 media/static/images/imageORDINATEUR_VPh4B20.jpg
+ create mode 100644 media/static/images/imageORDINATEUR_fhQHvDz.jpg
+ create mode 100644 media/static/images/imageORDINATEUR_lxZ3tum.jpg
+ create mode 100644 media/static/images/imageORDINATEUR_sOyFFVP.jpg
+ create mode 100644 media/static/images/image_Terre.jpg
+ create mode 100644 media/static/images/image_face_2.jpg
+ create mode 100644 media/static/images/miracast_dongle_hdmi.jpg
+ create mode 100644 media/static/images/samuel.jpg
+ create mode 100644 portfolio/__init__.py
+ create mode 100644 portfolio/__pycache__/__init__.cpython-311.pyc
+ create mode 100644 portfolio/__pycache__/__init__.cpython-312.pyc
+ create mode 100644 portfolio/__pycache__/settings.cpython-311.pyc
+ create mode 100644 portfolio/__pycache__/settings.cpython-312.pyc
+ create mode 100644 portfolio/__pycache__/urls.cpython-311.pyc
+ create mode 100644 portfolio/__pycache__/urls.cpython-312.pyc
+ create mode 100644 portfolio/__pycache__/wsgi.cpython-311.pyc
+ create mode 100644 portfolio/__pycache__/wsgi.cpython-312.pyc
+ create mode 100644 portfolio/asgi.py
+ create mode 100644 portfolio/settings.py
+ create mode 100644 portfolio/urls.py
+ create mode 100644 portfolio/wsgi.py
+ create mode 100644 requirements.txt
+ create mode 100644 static/images_stockees/camion-benne.JPG
+ create mode 100644 static/images_stockees/camion-citerne.JPG
+ create mode 100644 static/images_stockees/camion-routier.JPG
+ create mode 100644 static/images_stockees/camion_fourgon.JPG
+ create mode 100644 static/images_stockees/camion_frigorifique.JPG
+ create mode 100644 static/images_stockees/camion_plateau.JPG
+ create mode 100644 static/images_stockees/camion_porte-char.JPG
+ create mode 100644 static/images_stockees/camion_semi-remorque.JPG
+ create mode 100644 static/images_stockees/camion_tautliner.JPG
+ create mode 100644 static/images_stockees/img_lights_wide.jpg
+ create mode 100644 static/images_stockees/img_mountains_wide.jpg
+ create mode 100644 static/images_stockees/img_snow_wide.jpg
+ create mode 100644 templates/TransportRoutier_Main.html
+ create mode 100644 templates/diapo_Javascript_Page1.html
+ create mode 100644 templates/email_Javascript.htm
+ create mode 100644 templates/index.html
+ create mode 100644 templates/layouts/footer.html
+ create mode 100644 templates/layouts/header.html
+ create mode 100644 templates/layouts/main.html
+ create mode 100644 templates/login.html
+ create mode 100644 templates/page_administration.html
+ create mode 100644 templates/page_inscription.html
+ create mode 100644 templates/page_utilisateur.html
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git config --global http.postBuffer 2048576000
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$ git push
+Enumerating objects: 191, done.
+Counting objects: 100% (191/191), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (186/186), done.
+Writing objects: 100% (190/190), 5.29 MiB | 16.25 MiB/s, done.
+Total 190 (delta 42), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (42/42), done.
+To https://github.com/Mariogit20/PORTFOLIO-cv-MARIO-3.git
+   6961ca7..b76d8ce  Dev -> Dev
+
+AzureAD+SPSSE02MEN@DESKTOP-S95K8U0 MINGW64 /d/PYTHON DJANGO HOPES/github11/PORTFOLIO-cv-MARIO-3 (Dev)
+$
